@@ -1,7 +1,13 @@
 #!/bin/groovy
 pipeline {
+    parameters {
+        string(name:'VERSION', defaultValue:'latest', description:'Fedora version')
+    }
+
     agent {
-        dockerfile true
+        dockerfile {
+            additionalBuildArgs  "--build-arg version=${VERSION}"
+        }
     }
 
     options { timestamps() }
@@ -23,7 +29,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                archiveArtifacts(artifacts: '*.rpm')
+                zip(zipFile: "hello.fedora:${VERSION}.zip", archive: true, glob: '*.rpm')
+                //archiveArtifacts(artifacts: '*.rpm')
             }
         }
     }
@@ -33,8 +40,8 @@ pipeline {
             echo 'YAY!'
         }
         success { 
-            echo 'Call test pipeline here'
-            build(job: 'hf_testrpm', wait: true)
+            //echo 'Call test pipeline here'
+            //build(job: 'hf_testrpm', wait: true)
             // TODO^2 use matrix to call other pipeline
         }
         cleanup {

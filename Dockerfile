@@ -1,5 +1,6 @@
-FROM fedora
-MAINTAINER http://fedoraproject.org/wiki/Cloud
+ARG version=latest
+FROM fedora:${version}
+MAINTAINER code@hfuchs.net
 
 RUN dnf -y update && dnf clean all
 RUN dnf -y install \

@@ -6,7 +6,7 @@ pipeline {
 
     agent {
         docker {
-            image "fedora:${params:VERSION}"
+            image "fedora:${params.VERSION}"
             args '-u 0'
         }
     }

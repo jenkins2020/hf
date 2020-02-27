@@ -10,7 +10,8 @@ pipeline {
         stage('Init') {
             steps {
                 copyArtifacts(projectName: 'hf_buildrpm')
-                sh('ls')
+                sh('rpm -i hello-[^d]*rpm')
+                sh('hello')
             }
         }
     }

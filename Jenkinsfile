@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh('cp hello.spec ~/rpmbuild/SPECS')
                 sh('cd ~/rpmbuild/SPECS; rpmbuild -ba hello.spec')
-                sh('cp /home/user/rpmbuild/RPMS/*/*.rpm .')
+                sh('cp ~/rpmbuild/RPMS/*/*.rpm .')
             }
         }
         stage('Deploy') {

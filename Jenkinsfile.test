@@ -3,6 +3,7 @@ pipeline {
     agent {
         docker {
             image 'fedora'
+            args '-u 0'
         }
     }
 
@@ -10,7 +11,7 @@ pipeline {
         stage('Init') {
             steps {
                 copyArtifacts(projectName: 'hf_buildrpm')
-                sh('rpm -i hello-[^d]*rpm')
+                sh('dnf install -y hello-[^d]*rpm')
                 sh('hello')
             }
         }

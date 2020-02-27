@@ -1,0 +1,28 @@
+pipeline {
+    agent any 
+
+    stages {
+        stage('massively parallel build') {
+            matrix {
+                axes {
+                    axis {
+                        name 'VERSION'
+                        values '30', '31', '32' 
+                    }
+                }
+                stages {
+                    stage('build') {
+                        step {
+                            echo 'Building: ${VERSION}'
+                            build(
+                                job: 'hf_buildrpm', 
+                                parameters: [ string(name: 'VERSION', value: "${VERSION}") ]
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

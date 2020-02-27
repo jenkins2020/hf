@@ -39,11 +39,13 @@ pipeline {
         always {
             echo 'YAY!'
         }
+        /*
         success { 
-            //echo 'Call test pipeline here'
-            //build(job: 'hf_testrpm', wait: true)
+            echo 'Call test pipeline here'
+            build(job: 'hf_testrpm', wait: true)
             // TODO^2 use matrix to call other pipeline
         }
+        */
         cleanup {
             cleanWs()  // uses worspace-clean plugin
         }

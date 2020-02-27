@@ -32,7 +32,7 @@ pipeline {
         }
         success { 
             echo 'Call test pipeline here'
-            // TODO call other pipeline
+            build(job: 'hf_testrpm', wait: true)
             // TODO^2 use matrix to call other pipeline
         }
         cleanup {

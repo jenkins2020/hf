@@ -13,11 +13,21 @@ pipeline {
                     }
                 }
                 stages {
-                    stage('build') {
+                    stage('Build') {
                         steps {
-                            echo 'Building: ${VERSION}'
+                            echo "Building version ${VERSION}..."
                             build(
                                 job: 'hf_buildrpm', 
+                                wait: true,
+                                parameters: [ string(name: 'VERSION', value: "${VERSION}") ]
+                            )
+                        }
+                    }
+                    stage('Test') {
+                        steps {
+                            echo "Testing version ${VERSION}..."
+                            build(
+                                job: 'hf_testrpm', 
                                 parameters: [ string(name: 'VERSION', value: "${VERSION}") ]
                             )
                         }

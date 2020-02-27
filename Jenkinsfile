@@ -4,6 +4,8 @@ pipeline {
         dockerfile true
     }
 
+    options { timestamps() }
+
     stages {
         stage('Init') {
             steps {

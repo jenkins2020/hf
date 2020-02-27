@@ -28,9 +28,7 @@ pipeline {
     
     post {
         always {
-            ansiColor('xterm') {
-                echo '"\\e[33m YAY!  \\e[0m"'
-            }
+            echo 'YAY!'
         }
         success { 
             echo 'Call test pipeline here'

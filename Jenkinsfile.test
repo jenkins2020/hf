@@ -1,0 +1,17 @@
+#!/bin/groovy
+pipeline {
+    agent {
+        docker {
+            image 'fedora'
+        }
+    }
+
+    stages {
+        stage('Init') {
+            steps {
+                copyArtifacts(projectName: 'hf_buildrpm')
+                sh('ls')
+            }
+        }
+    }
+}

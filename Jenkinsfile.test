@@ -1,8 +1,12 @@
 #!/bin/groovy
 pipeline {
+    parameters {
+        string(name:'VERSION', defaultValue:'latest', description:'Fedora version')
+    }
+
     agent {
         docker {
-            image 'fedora'
+            image "fedora:${params:VERSION}"
             args '-u 0'
         }
     }

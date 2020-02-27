@@ -1,9 +1,11 @@
 pipeline {
-    agent any 
+    agent none 
 
     stages {
         stage('massively parallel build') {
             matrix {
+                agent any
+
                 axes {
                     axis {
                         name 'VERSION'
@@ -12,7 +14,7 @@ pipeline {
                 }
                 stages {
                     stage('build') {
-                        step {
+                        steps {
                             echo 'Building: ${VERSION}'
                             build(
                                 job: 'hf_buildrpm', 

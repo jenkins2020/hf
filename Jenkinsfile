@@ -25,4 +25,20 @@ pipeline {
             }
         }
     }
+    
+    post {
+        always {
+            ansiColor('xterm') {
+                echo '"\e[33m YAY!  \e[0m"'
+            }
+        }
+        success { 
+            echo 'Call test pipeline here'
+            // TODO call other pipeline
+            // TODO^2 use matrix to call other pipeline
+        }
+        cleanup {
+            cleanWs()  // uses worspace-clean plugin
+        }
+    }
 }
